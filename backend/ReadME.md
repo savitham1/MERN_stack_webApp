@@ -3,15 +3,12 @@
 Start the server: 
     backend % node index.js 
 
-View the page on browser:
-    
-    http://localhost:8000/api/v1/restaurants/
+View the page on browser: http://localhost:8000/api/v1/restaurants/
 
-Package-json
+Package.json
     
-    1. "type": "module" // to allow import statement (instead of require()) by vscode
-
-    2. Download all the dependencies.
+    - "type": "module" // to allow import statement (instead of require()) by vscode
+    - Download all the dependencies.
 
 server.js
 
