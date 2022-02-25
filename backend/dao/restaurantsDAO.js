@@ -25,28 +25,19 @@ export default class RestaurantsDAO {
         // filter = {"key":"value", "key1":"value"}
 
         let query
-        switch (filters) {
-            // If the user passes filters
-            // query by name
-            case "name":
+        if (filters) { // If the user passes filters
+            
+            if ("name" in filters) { // query by name
                 // Here $text is not a database field(column) but it is defined in the mongodb atlas.
                 query = { $text: { $search: filters["name"] } }
-                break;
-            
-            // Query by cuisine
-            case "cuisine":
+            }
+            else if ("cuisine" in filters) { // Query by cuisine
                 // this is a database field
                 query = { "cuisine": { $eq: filters["cuisine"] } } // if the cuisine from the DB == cuisine passed by user.
-                break;
-
-            // Query by zipcode
-            case "zipcode":
+            }
+            else if ("zipcode" in filters) { // Query by zipcode
                 query = { "address.zipcode": { $eq: filters["zipcode"] } }
-                break;
-            
-            // No filter from the user.
-            default:
-                break;
+            }
         }
 
         let cursor // variable that reference the list of restaurants from the db.
