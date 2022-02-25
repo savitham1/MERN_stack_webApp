@@ -1,6 +1,9 @@
 import app from "./server.js"
 import mongodb from "mongodb"
 import dotenv from "dotenv" // to access the environment variables.
+
+import RestaurantsDAO from "./dao/restaurantsDAO.js"
+
 dotenv.config() // load in the environment variables.
 
 // A module in NodeJS library that helps in interacting with MongoDB Database.
@@ -22,10 +25,13 @@ MongoClient.connect(
         process.exit(1)
     })
     .then(async client => {
-        // after the database is connected and no errors was found, start the server an listen.
-        console.log(`before the listen`)
+        
+        // Refer to the Collection in the DB.
+        await RestaurantsDAO.injectDB(client) // get the initial reference to the collection [Table] of the database.
+        
+        console.log(`Client ${client}`)
+        // Start the server: after the database is connected and no errors was found, start the server and listen.
         app.listen(port, () => {
             console.log(`listening on port ${port}`)
         })
-        console.log(`after the listen`)
     }) // next create an api
